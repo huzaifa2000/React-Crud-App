@@ -1,0 +1,32 @@
+.card{
+    border-style: hidden;
+    border-radius: 20px;
+}
+
+.addUser-btn{
+    text-align: right;
+    margin-right: 14px;
+}
+
+th, td{
+    line-height: normal;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: .5px;
+    padding: 5px 10px;
+    text-transform: capitalize;
+}
+
+
+h4{
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-left-style: solid;    
+    border-left-color: #2E8B57;
+    line-height: 25px;
+}
+
+.font-size{
+    font-size: smaller;
+}
