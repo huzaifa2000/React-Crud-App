@@ -37,10 +37,10 @@ const UserTable = ({ userList }) => {
         <Card className="w-100">
           <div className="d-flex justify-content-between px-3">
             <h4>
-              <span className="ps-2">User Info</span>
+              <span className="ps-4">User Info</span>
             </h4>
             <Link to="AddUser">
-              <Button className="btn-success">+Add User</Button>
+              <Button className="btn-success" style={{padding: '12px 45px'}}>+ Add User</Button>
             </Link>
           </div>
           <Card.Body>

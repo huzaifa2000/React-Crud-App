@@ -1,0 +1,43 @@
+.input-field-color{
+    background-color: #dcdcdc;
+}
+
+
+.container{
+	max-width: 1230px;
+	width: 100%;
+}
+
+h1{
+	font-weight: 700;
+	font-size: 45px;
+	font-family: 'Roboto', sans-serif;
+}
+
+.header{
+	margin-bottom: 50px;
+}
+
+.btn-size{
+    padding: 12px 45px;
+}
+
+.label{
+    font-size: 17px;
+    text-align: left;
+    font-size: large;
+}
+
+.form-group input{
+    background-color: #dcdcdc;
+}
+
+h2{
+    font-weight: 600;
+    /* font-size: 14px; */
+    text-transform: uppercase;
+    border-left-style: solid;    
+    border-left-color: #2E8B57;
+    line-height: 10px;
+    text-align: left;
+}

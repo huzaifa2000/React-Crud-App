@@ -20,7 +20,7 @@ th, td{
 
 h4{
     font-weight: 600;
-    font-size: 14px;
+    /* font-size: 14px; */
     text-transform: uppercase;
     border-left-style: solid;    
     border-left-color: #2E8B57;
