@@ -4,7 +4,7 @@ const UserData = [
         firstName:'Huzaifa',
         lastName:'Nadeem',
         age:'23',
-        DOB:'24-june-2023',
+        DOB:'06-24-2023',
         address:'22/a abcd, Karachi, Pakistan'
     },
     {
@@ -12,7 +12,7 @@ const UserData = [
         firstName:'Huzaifa',
         lastName:'Nadeem',
         age:'23',
-        DOB:'24-june-2023',
+        DOB:'06-24-2023',
         address:'22/a abcd, Karachi, Pakistan'
     },
     {
@@ -20,7 +20,7 @@ const UserData = [
         firstName:'Huzaifa',
         lastName:'Nadeem',
         age:'23',
-        DOB:'24-june-2023',
+        DOB:'12-29-2022',
         address:'22/a abcd, Karachi, Pakistan'
     },
     {
@@ -28,7 +28,7 @@ const UserData = [
         firstName:'Huzaifa',
         lastName:'Nadeem',
         age:'23',
-        DOB:'24-june-2023',
+        DOB:'06-24-2000',
         address:'22/a abcd, Karachi, Pakistan'
     },
     {
@@ -36,7 +36,7 @@ const UserData = [
         firstName:'kohli',
         lastName:'Nadeem',
         age:'22',
-        DOB:'24-june-2023',
+        DOB:'12-12-2012',
         address:'22/a abcd, Karachi, Pakistan'
     },
     {
@@ -44,7 +44,7 @@ const UserData = [
         firstName:'Huzaifa',
         lastName:'Nadeem',
         age:'23',
-        DOB:'24-june-2023',
+        DOB:'11-11-1999',
         address:'22/a abcd, Karachi, Pakistan'
     }
 ]

@@ -1,8 +1,8 @@
+/* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useState } from "react";
 import { Button, Col, Row, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import UserData from "./Users";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
@@ -13,23 +13,18 @@ const UserTable = ({ userList }) => {
   let navigate = useNavigate();
 
   const handleDelete = (id) => {
-    let index = UserData.map(function (e) {
-      return e.id;
-    }).indexOf(id);
+    // eslint-disable-next-line react/prop-types
+    let index = userList
+      .map(function (e) {
+        return e.id;
+      })
+      .indexOf(id);
 
-    UserData.splice(index, 1);
+    // eslint-disable-next-line react/prop-types
+    userList.splice(index, 1);
 
     navigate("/");
   };
-
-  // const handleEdit = (id, firstName, lastName, age, DOB, address) => {
-  //   localStorage.setItem("firstName", firstName);
-  //   localStorage.setItem("lastName", lastName);
-  //   localStorage.setItem("age", age);
-  //   localStorage.setItem("DOB", DOB);
-  //   localStorage.setItem("address", address);
-  //   localStorage.setItem("id", id);
-  // };
 
   return (
     <Row>
@@ -40,7 +35,9 @@ const UserTable = ({ userList }) => {
               <span className="ps-4">User Info</span>
             </h4>
             <Link to="AddUser">
-              <Button className="btn-success" style={{padding: '12px 45px'}}>+ Add User</Button>
+              <Button className="btn-success" style={{ padding: "12px 45px" }}>
+                + Add User
+              </Button>
             </Link>
           </div>
           <Card.Body>
@@ -69,20 +66,8 @@ const UserTable = ({ userList }) => {
                           <td>{item.DOB}</td>
                           <td>{item.address}</td>
                           <td>
-                            <Link to="/editUser">
-                              <Button
-                                onClick={() =>
-                                  handleEdit(
-                                    item.id,
-                                    item.firstName,
-                                    item.lastName,
-                                    item.age,
-                                    item.DOB,
-                                    item.address
-                                  )
-                                }
-                                className="font-size btn-success"
-                              >
+                            <Link to={`/EditUser/${item.id}`}>
+                              <Button className="font-size btn-success">
                                 <FaEdit />
                               </Button>
                             </Link>

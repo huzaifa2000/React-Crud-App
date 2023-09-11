@@ -1,50 +1,17 @@
+/* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import UserData from "./Users";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import { Col, Row } from "react-bootstrap";
 import "./EditUser.css";
-// import { v4 as uuid } from "uuid";
 
 // eslint-disable-next-line react/prop-types
-const EditUser = ({ userList }) => {
-  // const [firstName, setFirstName] = useState("");
-  // const [lastName, setLastName] = useState("");
-  // const [age, setAge] = useState("");
-  // const [DOB, setDOB] = useState("");
-  // const [address, setAddress] = useState("");
-  // const [id, setId] = useState("");
-  // const navigate = useNavigate();
-
-  // let index = Users.map(function (e) {
-  //   return e.id;
-  // }).indexOf(id);
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   let object = Users[index];
-
-  //   object.firstName = firstName;
-  //   object.lastName = lastName;
-  //   object.age = age;
-  //   object.DOB = DOB;
-  //   object.address = address;
-
-  //   navigate("/");
-  // };
-
-  // useEffect(() => {
-  //   setFirstName(localStorage.getItem("firstName"));
-  //   setLastName(localStorage.getItem("lastName"));
-  //   setAge(localStorage.getItem("age"));
-  //   setDOB(localStorage.getItem("DOB"));
-  //   setAddress(localStorage.getItem("address"));
-  //   setId(localStorage.getItem("id"));
-  // }, []);
+const EditUser = (props) => {
+  const { userList, setUserList } = props;
+  const { userId } = useParams();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -56,49 +23,39 @@ const EditUser = ({ userList }) => {
   });
 
   const navigate = useNavigate();
+  let user = {};
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
+  useEffect(() => {
+    if (userId) {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      user = userList.find((item) => item.id === userId);
+    }
 
-  //   // eslint-disable-next-line react/prop-types
-  //   let updatedUserList = userList.map(Users =>
-  //     Users.id === formData.id ? formData : Users
-  //   );
+    setFormData({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      age: user.age,
+      DOB: user.DOB,
+      address: user.address,
+      id: user.id,
+    });
 
-  //   navigate("/");
-  // };
-
-  // let index = Users.map(function (e) {
-  //   return e.id;
-  // }).indexOf(id);
+    // console.log(user);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let object = UserData[index];
-
-    object.firstName = formData.firstName;
-    object.lastName = formData.lastName;
-    object.age = formData.age;
-    object.DOB = formData.DOB;
-    object.address = formData.address;
-    object.id = formData.id;
-
+    const updatedList = userList.map((item) => {
+      if (item.id === formData.id) {
+        return formData; // Replace the item with the updated one
+      }
+      return item;
+    });
+    // console.log(formData);
+    setUserList(updatedList);
     navigate("/");
   };
-
-  // console.log(updatedUserList);
-
-  useEffect(() => {
-    const id = formData.id;
-    // eslint-disable-next-line react/prop-types
-    const user = userList.find((user) => user.id === id);
-    console.log(id);
-
-    if (user) {
-      setFormData(user);
-    }
-  }, [formData.id, userList]);
 
   return (
     <Card className="w-100">
@@ -222,7 +179,9 @@ const EditUser = ({ userList }) => {
 
             <Col lg="2">
               <Link to="/">
-                <Button className="d-flex justify-content-start btn-size btn-success">Back</Button>
+                <Button className="d-flex justify-content-start btn-size btn-success">
+                  Back
+                </Button>
               </Link>
             </Col>
           </Row>

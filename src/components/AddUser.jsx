@@ -1,15 +1,15 @@
+/* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import UserData from "./Users";
 import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import "./AddUser.css";
 import Card from "react-bootstrap/Card";
 
 // eslint-disable-next-line react/prop-types
-const AddUser = ({ setUserList }) => {
+const AddUser = ({ userList }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -32,7 +32,7 @@ const AddUser = ({ setUserList }) => {
       d = formData.DOB,
       f = formData.address;
 
-    UserData.push({
+    userList.push({
       id: uniqueID,
       firstName: a,
       lastName: b,
@@ -173,7 +173,9 @@ const AddUser = ({ setUserList }) => {
 
             <Col lg="2">
               <Link to="/">
-                <Button className="d-flex justify-content-start btn-size btn-success">Back</Button>
+                <Button className="d-flex justify-content-start btn-size btn-success">
+                  Back
+                </Button>
               </Link>
             </Col>
           </Row>

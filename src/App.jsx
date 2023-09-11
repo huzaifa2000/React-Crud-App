@@ -15,8 +15,8 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<UserTable userList={userList} />} />
-        <Route path='/AddUser' element={<AddUser setUserList={setUserList} />} />
-        <Route path='/EditUser' element={<EditUser userList={userList}/>} />
+        <Route path='/AddUser' element={<AddUser userList={userList} />} />
+        <Route path='/EditUser/:userId' element={<EditUser userList={userList} setUserList={setUserList}/>} />
       </Routes>
     </Router>
    </div>
