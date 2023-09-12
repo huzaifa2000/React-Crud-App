@@ -1,23 +1,21 @@
 /* eslint-disable react/prop-types */
-// eslint-disable-next-line no-unused-vars
-import React, { useState, useContext } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Link, useNavigate } from "react-router-dom";
-import { v4 as uuid } from "uuid";
-import "./AddUser.css";
-import Card from "react-bootstrap/Card";
-import { UserContext } from "../context/UserContext";
+/* eslint-disable react-refresh/only-export-components */
+// src/components/AddUser.jsx
+import { useState } from 'react';
+import { Button, Col, Form, Row } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
+import Card from 'react-bootstrap/Card';
+import { connect } from 'react-redux';
+import { addUser } from '../state/actionCreators/userActions';
 
-// eslint-disable-next-line react/prop-types
-const AddUser = () => {
-  const { userList, setUserList } = useContext(UserContext);
+const AddUser = ({ addUser }) => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    age: "",
-    DOB: "",
-    address: "",
+    firstName: '',
+    lastName: '',
+    age: '',
+    DOB: '',
+    address: '',
   });
 
   const navigate = useNavigate();
@@ -28,23 +26,12 @@ const AddUser = () => {
     const ids = uuid();
     const uniqueID = ids.slice(0, 8);
 
-    let a = formData.firstName,
-      b = formData.lastName,
-      c = formData.age,
-      d = formData.DOB,
-      f = formData.address;
-
-    const newUser = {
+    addUser({
       id: uniqueID,
-      firstName: a,
-      lastName: b,
-      age: c,
-      DOB: d,
-      address: f,
-    };
+      ...formData,
+    });
 
-    setUserList([...userList, newUser]); 
-    navigate("/");
+    navigate('/');
   };
 
   return (
@@ -53,19 +40,14 @@ const AddUser = () => {
         <Row>
           <Col className="px-4" lg="4">
             <h2 className="py-4 px-3">
-              <span
-                className="ps-2"
-                style={{
-                  fontWeight: "600",
-                }}
-              >
+              <span className="ps-2" style={{ fontWeight: '600' }}>
                 Add User
               </span>
             </h2>
           </Col>
         </Row>
 
-        <Form className="d-grid gap-2" style={{ margin: "10px" }}>
+        <Form className="d-grid gap-2" style={{ margin: '10px' }}>
           <Row>
             <Col lg="6">
               <div className="label">
@@ -77,7 +59,7 @@ const AddUser = () => {
                   placeholder="Huzaifa"
                   required
                   className="p-2"
-                  style={{ backgroundColor: "#dcdcdc" }}
+                  style={{ backgroundColor: '#dcdcdc' }}
                   onChange={(e) =>
                     setFormData({ ...formData, firstName: e.target.value })
                   }
@@ -95,7 +77,7 @@ const AddUser = () => {
                   placeholder="Nadeem"
                   required
                   className="p-2"
-                  style={{ backgroundColor: "#dcdcdc" }}
+                  style={{ backgroundColor: '#dcdcdc' }}
                   onChange={(e) =>
                     setFormData({ ...formData, lastName: e.target.value })
                   }
@@ -115,7 +97,7 @@ const AddUser = () => {
                   placeholder="23"
                   required
                   className="p-2"
-                  style={{ backgroundColor: "#dcdcdc" }}
+                  style={{ backgroundColor: '#dcdcdc' }}
                   onChange={(e) =>
                     setFormData({ ...formData, age: e.target.value })
                   }
@@ -132,7 +114,7 @@ const AddUser = () => {
                   type="date"
                   required
                   className="p-2"
-                  style={{ backgroundColor: "#dcdcdc" }}
+                  style={{ backgroundColor: '#dcdcdc' }}
                   onChange={(e) =>
                     setFormData({ ...formData, DOB: e.target.value })
                   }
@@ -152,7 +134,7 @@ const AddUser = () => {
                   placeholder="A 38 Karachi"
                   required
                   className="p-2"
-                  style={{ backgroundColor: "#dcdcdc" }}
+                  style={{ backgroundColor: '#dcdcdc' }}
                   onChange={(e) =>
                     setFormData({ ...formData, address: e.target.value })
                   }
@@ -188,4 +170,10 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addUser: (user) => dispatch(addUser(user)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(AddUser);

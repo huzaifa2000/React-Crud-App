@@ -1,32 +1,17 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
-// eslint-disable-next-line no-unused-vars
-import React, { useContext, useState } from "react";
-import { Button, Col, Row, Table } from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-import Card from "react-bootstrap/Card";
+// src/components/UserTable.jsx
+import { connect } from 'react-redux';
+import { Button, Col, Row, Table } from 'react-bootstrap';
+import { FaTrashAlt, FaEdit } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import Card from 'react-bootstrap/Card';
+import { deleteUser } from '../state/actionCreators/userActions';
 import "./UserTable.css";
-import { UserContext } from "../context/UserContext"
 
-// eslint-disable-next-line react/prop-types
-const UserTable = () => {
-
-  const { userList } = useContext(UserContext);
-  let navigate = useNavigate();
-
+const UserTable = ({ userList, deleteUser }) => {
   const handleDelete = (id) => {
-    // eslint-disable-next-line react/prop-types
-    let index = userList
-      .map(function (e) {
-        return e.id;
-      })
-      .indexOf(id);
-
-    // eslint-disable-next-line react/prop-types
-    userList.splice(index, 1);
-
-    navigate("/");
+    deleteUser(id);
   };
 
   return (
@@ -38,7 +23,7 @@ const UserTable = () => {
               <span className="ps-4">User Info</span>
             </h4>
             <Link to="AddUser">
-              <Button className="btn-success" style={{ padding: "12px 45px" }}>
+              <Button className="btn-success" style={{ padding: '12px 45px' }}>
                 + Add User
               </Button>
             </Link>
@@ -47,7 +32,6 @@ const UserTable = () => {
             <Table className="w-100" bordered hover>
               <thead>
                 <tr>
-                  {/* <th>#</th> */}
                   <th>First Name</th>
                   <th>Last Name</th>
                   <th>Age</th>
@@ -58,35 +42,31 @@ const UserTable = () => {
               </thead>
               <tbody>
                 {userList && userList.length > 0
-                  ? // eslint-disable-next-line react/prop-types
-                    userList.map((item) => {
-                      return (
-                        // eslint-disable-next-line react/jsx-key
-                        <tr>
-                          <td>{item.firstName}</td>
-                          <td>{item.lastName}</td>
-                          <td>{item.age}</td>
-                          <td>{item.DOB}</td>
-                          <td>{item.address}</td>
-                          <td>
-                            <Link to={`/EditUser/${item.id}`}>
-                              <Button className="font-size btn-success">
-                                <FaEdit />
-                              </Button>
-                            </Link>
-                            &nbsp;
-                            <Button
-                              onClick={() => handleDelete(item.id)}
-                              variant="danger"
-                              className="font-size"
-                            >
-                              <FaTrashAlt />
+                  ? userList.map((item) => (
+                      <tr key={item.id}>
+                        <td>{item.firstName}</td>
+                        <td>{item.lastName}</td>
+                        <td>{item.age}</td>
+                        <td>{item.DOB}</td>
+                        <td>{item.address}</td>
+                        <td>
+                          <Link to={`/EditUser/${item.id}`}>
+                            <Button className="font-size btn-success">
+                              <FaEdit />
                             </Button>
-                          </td>
-                        </tr>
-                      );
-                    })
-                  : "No Data Available"}
+                          </Link>
+                          &nbsp;
+                          <Button
+                            onClick={() => handleDelete(item.id)}
+                            variant="danger"
+                            className="font-size"
+                          >
+                            <FaTrashAlt />
+                          </Button>
+                        </td>
+                      </tr>
+                    ))
+                  : 'No Data Available'}
               </tbody>
             </Table>
           </Card.Body>
@@ -96,4 +76,17 @@ const UserTable = () => {
   );
 };
 
-export default UserTable;
+const mapStateToProps = (state) => {
+  return {
+    userList: state.user.userList,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deleteUser: (id) => dispatch(deleteUser(id)),
+  };
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
+export default connect(mapStateToProps, mapDispatchToProps)(UserTable);

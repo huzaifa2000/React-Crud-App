@@ -1,17 +1,16 @@
-/* eslint-disable react/prop-types */
-// eslint-disable-next-line no-unused-vars
-import React, { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import { Col, Row } from "react-bootstrap";
 import "./EditUser.css";
-import { UserContext } from "../context/UserContext";
+import { useDispatch, useSelector } from "react-redux";
+import { editUser } from "../state/actionCreators/userActions";
 
-// eslint-disable-next-line react/prop-types
 const EditUser = () => {
-  const { userList, setUserList } = useContext(UserContext); 
+  const dispatch = useDispatch();
+  const userList = useSelector((state) => state.userList);
 
   const { userId } = useParams();
 
@@ -25,37 +24,25 @@ const EditUser = () => {
   });
 
   const navigate = useNavigate();
-  let user = {};
 
   useEffect(() => {
     if (userId) {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      user = userList.find((item) => item.id === userId);
+      let user = userList.find((item) => item.id === userId);
+
+      setFormData({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        age: user.age,
+        DOB: user.DOB,
+        address: user.address,
+        id: user.id,
+      });
     }
-
-    setFormData({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      age: user.age,
-      DOB: user.DOB,
-      address: user.address,
-      id: user.id,
-    });
-
-    // console.log(user);
-  }, []);
+  }, [userId, userList]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const updatedList = userList.map((item) => {
-      if (item.id === formData.id) {
-        return formData; // Replace the item with the updated one
-      }
-      return item;
-    });
-    // console.log(formData);
-    setUserList(updatedList);
+    dispatch(editUser(formData));
     navigate("/");
   };
 
