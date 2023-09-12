@@ -1,15 +1,18 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Col, Row, Table } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import "./UserTable.css";
+import { UserContext } from "../context/UserContext"
 
 // eslint-disable-next-line react/prop-types
-const UserTable = ({ userList }) => {
+const UserTable = () => {
+
+  const { userList } = useContext(UserContext);
   let navigate = useNavigate();
 
   const handleDelete = (id) => {

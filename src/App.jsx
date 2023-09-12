@@ -1,26 +1,24 @@
-// import { useState } from 'react'
-import './App.css'
-import UserTable from './components/UserTable'
-import AddUser from './components/AddUser'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import './App.css';
+import UserTable from './components/UserTable';
+import AddUser from './components/AddUser';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EditUser from './components/EditUser';
-import { useState } from 'react';
-import UserData from './components/Users';
+import { UserProvider } from './context/UserContext';
 
 function App() {
-  const [userList, setUserList] = useState(UserData)
-
   return (
-   <div>
-    <Router>
-      <Routes>
-        <Route path='/' element={<UserTable userList={userList} />} />
-        <Route path='/AddUser' element={<AddUser userList={userList} />} />
-        <Route path='/EditUser/:userId' element={<EditUser userList={userList} setUserList={setUserList}/>} />
-      </Routes>
-    </Router>
-   </div>
-  )
+    <UserProvider>
+      <div>
+        <Router>
+          <Routes>
+            <Route path='/' element={<UserTable />} />
+            <Route path='/AddUser' element={<AddUser />} />
+            <Route path='/EditUser/:userId' element={<EditUser />} />
+          </Routes>
+        </Router>
+      </div>
+    </UserProvider>
+  );
 }
 
-export default App
+export default App;

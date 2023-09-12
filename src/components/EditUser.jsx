@@ -1,16 +1,18 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import { Col, Row } from "react-bootstrap";
 import "./EditUser.css";
+import { UserContext } from "../context/UserContext";
 
 // eslint-disable-next-line react/prop-types
-const EditUser = (props) => {
-  const { userList, setUserList } = props;
+const EditUser = () => {
+  const { userList, setUserList } = useContext(UserContext); 
+
   const { userId } = useParams();
 
   const [formData, setFormData] = useState({

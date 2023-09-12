@@ -1,15 +1,17 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import "./AddUser.css";
 import Card from "react-bootstrap/Card";
+import { UserContext } from "../context/UserContext";
 
 // eslint-disable-next-line react/prop-types
-const AddUser = ({ userList }) => {
+const AddUser = () => {
+  const { userList, setUserList } = useContext(UserContext);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -32,15 +34,16 @@ const AddUser = ({ userList }) => {
       d = formData.DOB,
       f = formData.address;
 
-    userList.push({
+    const newUser = {
       id: uniqueID,
       firstName: a,
       lastName: b,
       age: c,
       DOB: d,
       address: f,
-    });
+    };
 
+    setUserList([...userList, newUser]); 
     navigate("/");
   };
 
