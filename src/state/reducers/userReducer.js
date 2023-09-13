@@ -15,7 +15,6 @@ const initialState = {
         return {
           ...state,
           userList: action.payload.updatedList
-          // userList: state.userList.map(user => user.id === action.payload.id ? action.payload : user)
         };
       case 'DELETE_USER':
         return {
