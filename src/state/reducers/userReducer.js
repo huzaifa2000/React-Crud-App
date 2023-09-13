@@ -4,6 +4,7 @@ const initialState = {
   };
   
   const userReducer = (state = initialState, action) => {
+  
     switch (action.type) {
       case 'ADD_USER':
         return {
@@ -13,7 +14,8 @@ const initialState = {
       case 'EDIT_USER':
         return {
           ...state,
-          userList: state.userList.map(user => user.id === action.payload.id ? action.payload : user)
+          userList: action.payload.updatedList
+          // userList: state.userList.map(user => user.id === action.payload.id ? action.payload : user)
         };
       case 'DELETE_USER':
         return {

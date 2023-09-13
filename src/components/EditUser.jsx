@@ -6,12 +6,10 @@ import Card from "react-bootstrap/Card";
 import { Col, Row } from "react-bootstrap";
 import "./EditUser.css";
 import { useDispatch, useSelector } from "react-redux";
-import { editUser } from "../state/actionCreators/userActions";
 
 const EditUser = () => {
   const dispatch = useDispatch();
-  const userList = useSelector((state) => state.userList);
-
+  const userList = useSelector((state) => state.user.userList);
   const { userId } = useParams();
 
   const [formData, setFormData] = useState({
@@ -24,25 +22,45 @@ const EditUser = () => {
   });
 
   const navigate = useNavigate();
+  let user = {};
 
   useEffect(() => {
     if (userId) {
-      let user = userList.find((item) => item.id === userId);
-
-      setFormData({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        age: user.age,
-        DOB: user.DOB,
-        address: user.address,
-        id: user.id,
-      });
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      user = userList.find((item) => item.id === userId);
     }
+
+    setFormData({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      age: user.age,
+      DOB: user.DOB,
+      address: user.address,
+      id: user.id,
+    });
+
   }, [userId, userList]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editUser(formData));
+
+    const updatedList = userList.map((item) => {
+      if (item.id === formData.id) {
+        return formData;
+      }
+      return item;
+    });
+
+    // dispatch(editUser(updatedList));
+
+    dispatch({
+      type: 'EDIT_USER',
+      payload: {
+        id: formData.id,
+        updatedList: updatedList,
+      },
+    });
+    
     navigate("/");
   };
 

@@ -10,6 +10,7 @@ import { deleteUser } from '../state/actionCreators/userActions';
 import "./UserTable.css";
 
 const UserTable = ({ userList, deleteUser }) => {
+  
   const handleDelete = (id) => {
     deleteUser(id);
   };
