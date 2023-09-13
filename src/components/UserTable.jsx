@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 // src/components/UserTable.jsx
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Button, Col, Row, Table } from 'react-bootstrap';
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -9,10 +9,13 @@ import Card from 'react-bootstrap/Card';
 import { deleteUser } from '../state/actionCreators/userActions';
 import "./UserTable.css";
 
-const UserTable = ({ userList, deleteUser }) => {
-  
+const UserTable = () => {
+
+  const userList = useSelector(state => state.user.userList);
+  const dispatch = useDispatch();
+
   const handleDelete = (id) => {
-    deleteUser(id);
+    dispatch(deleteUser(id));
   };
 
   return (
@@ -77,17 +80,4 @@ const UserTable = ({ userList, deleteUser }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    userList: state.user.userList,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteUser: (id) => dispatch(deleteUser(id)),
-  };
-};
-
-// eslint-disable-next-line react-refresh/only-export-components
-export default connect(mapStateToProps, mapDispatchToProps)(UserTable);
+export default UserTable;
