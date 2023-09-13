@@ -1,15 +1,15 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react-refresh/only-export-components */
 // src/components/AddUser.jsx
 import { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import Card from 'react-bootstrap/Card';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addUser } from '../state/actionCreators/userActions';
 
-const AddUser = ({ addUser }) => {
+const AddUser = () => {
+
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -26,10 +26,10 @@ const AddUser = ({ addUser }) => {
     const ids = uuid();
     const uniqueID = ids.slice(0, 8);
 
-    addUser({
+    dispatch(addUser({
       id: uniqueID,
       ...formData,
-    });
+    }));
 
     navigate('/');
   };
@@ -170,10 +170,4 @@ const AddUser = ({ addUser }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addUser: (user) => dispatch(addUser(user)),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(AddUser);
+export default AddUser;
