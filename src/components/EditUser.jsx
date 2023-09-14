@@ -6,6 +6,7 @@ import Card from "react-bootstrap/Card";
 import { Col, Row } from "react-bootstrap";
 import "./EditUser.css";
 import { useDispatch, useSelector } from "react-redux";
+import { editUser } from "../state/userSlice";
 
 const EditUser = () => {
   const dispatch = useDispatch();
@@ -38,29 +39,13 @@ const EditUser = () => {
       address: user.address,
       id: user.id,
     });
-
   }, [userId, userList]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const updatedList = userList.map((item) => {
-      if (item.id === formData.id) {
-        return formData;
-      }
-      return item;
-    });
+    dispatch(editUser({ id: formData.id, formData }));
 
-    // dispatch(editUser(updatedList));
-
-    dispatch({
-      type: 'EDIT_USER',
-      payload: {
-        id: formData.id,
-        updatedList: updatedList,
-      },
-    });
-    
     navigate("/");
   };
 

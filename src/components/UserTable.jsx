@@ -6,13 +6,15 @@ import { Button, Col, Row, Table } from 'react-bootstrap';
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
-import { deleteUser } from '../state/actionCreators/userActions';
+import { deleteUser } from '../state/userSlice';
 import "./UserTable.css";
 
 const UserTable = () => {
 
   const userList = useSelector(state => state.user.userList);
   const dispatch = useDispatch();
+
+  console.log("user table", userList);
 
   const handleDelete = (id) => {
     dispatch(deleteUser(id));

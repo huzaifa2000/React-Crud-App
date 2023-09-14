@@ -5,7 +5,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import Card from 'react-bootstrap/Card';
 import { useDispatch } from 'react-redux';
-import { addUser } from '../state/actionCreators/userActions';
+// import { addUser } from '../state/actionCreators/userActions';
+import { addUser } from '../state/userSlice';
 
 const AddUser = () => {
 
