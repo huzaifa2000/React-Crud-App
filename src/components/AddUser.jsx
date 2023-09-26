@@ -158,7 +158,7 @@ const AddUser = () => {
             </Col>
 
             <Col lg="2">
-              <Link to="/">
+              <Link to="/React-Crud-App">
                 <Button className="d-flex justify-content-start btn-size btn-success">
                   Back
                 </Button>
