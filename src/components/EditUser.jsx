@@ -46,7 +46,7 @@ const EditUser = () => {
 
     dispatch(editUser({ id: formData.id, formData }));
 
-    navigate("/");
+    navigate("/React-Crud-App");
   };
 
   return (

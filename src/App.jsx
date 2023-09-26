@@ -7,15 +7,13 @@ import EditUser from './components/EditUser';
 
 function App() {
   return (
-    <div>
       <Router>
         <Routes>
-          <Route path="/" element={<UserTable />} />
-          <Route path="/AddUser" element={<AddUser />} />
-          <Route path="/EditUser/:userId" element={<EditUser />} />
+          <Route path="React-Crud-App/" element={<UserTable />} />
+          <Route path="React-Crud-App/AddUser" element={<AddUser />} />
+          <Route path="React-Crud-App/EditUser/:userId" element={<EditUser />} />
         </Routes>
       </Router>
-    </div>
   );
 }
 

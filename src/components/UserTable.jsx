@@ -1,17 +1,16 @@
 /* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
 // src/components/UserTable.jsx
-import { useSelector, useDispatch } from 'react-redux';
-import { Button, Col, Row, Table } from 'react-bootstrap';
-import { FaTrashAlt, FaEdit } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import Card from 'react-bootstrap/Card';
-import { deleteUser } from '../state/userSlice';
+import { useSelector, useDispatch } from "react-redux";
+import { Button, Col, Row, Table } from "react-bootstrap";
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import { deleteUser } from "../state/userSlice";
 import "./UserTable.css";
 
 const UserTable = () => {
-
-  const userList = useSelector(state => state.user.userList);
+  const userList = useSelector((state) => state.user.userList);
   const dispatch = useDispatch();
 
   console.log("user table", userList);
@@ -29,7 +28,7 @@ const UserTable = () => {
               <span className="ps-4">User Info</span>
             </h4>
             <Link to="AddUser">
-              <Button className="btn-success" style={{ padding: '12px 45px' }}>
+              <Button className="btn-success" style={{ padding: "12px 45px" }}>
                 + Add User
               </Button>
             </Link>
@@ -56,7 +55,7 @@ const UserTable = () => {
                         <td>{item.DOB}</td>
                         <td>{item.address}</td>
                         <td>
-                          <Link to={`/EditUser/${item.id}`}>
+                          <Link to={`EditUser/${item.id}`}>
                             <Button className="font-size btn-success">
                               <FaEdit />
                             </Button>
@@ -72,7 +71,7 @@ const UserTable = () => {
                         </td>
                       </tr>
                     ))
-                  : 'No Data Available'}
+                  : "No Data Available"}
               </tbody>
             </Table>
           </Card.Body>

@@ -32,7 +32,7 @@ const AddUser = () => {
       ...formData,
     }));
 
-    navigate('/');
+    navigate('/React-Crud-App');
   };
 
   return (
